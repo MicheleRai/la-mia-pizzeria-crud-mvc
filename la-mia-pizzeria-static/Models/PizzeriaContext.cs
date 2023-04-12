@@ -9,10 +9,10 @@ namespace la_mia_pizzeria_static.Models
 		public PizzeriaContext(DbContextOptions<PizzeriaContext> options) : base(options) { }
 		public DbSet<Pizza> Pizze { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PizzeriaDb;Integrated Security=True;Pooling=False;TrustServerCertificate=True");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PizzeriaDb;Integrated Security=True;Pooling=False;TrustServerCertificate=True");
+        //}
 
         public void Seed()
         {

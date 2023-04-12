@@ -77,9 +77,9 @@ namespace la_mia_pizzeria_static.Controllers
 			{
 				return View(pizza);
 			}
-			var savedPost = _context.Pizze.AsNoTracking().FirstOrDefault(p => p.Id == id);
+			var savedPizza = _context.Pizze.AsNoTracking().FirstOrDefault(p => p.Id == id);
 
-			if (savedPost is null)
+			if (savedPizza is null)
 			{
 				return View("NotFound");
 			}
