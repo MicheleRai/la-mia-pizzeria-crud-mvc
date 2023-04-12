@@ -6,7 +6,8 @@ namespace la_mia_pizzeria_static.Models
 {
     public class PizzeriaContext : DbContext
     {
-        public DbSet<Pizza> Pizze { get; set; }
+		public PizzeriaContext(DbContextOptions<PizzeriaContext> options) : base(options) { }
+		public DbSet<Pizza> Pizze { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

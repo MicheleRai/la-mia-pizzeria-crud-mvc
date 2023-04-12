@@ -18,6 +18,13 @@
 			<p>
 				@pizza.Prezzo $
 			</p>
+			<div class="buttonContainer d-inline-flex">
+				<a class="btn btn-warning me-2" href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a>
+				<form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id">
+					@Html.AntiForgeryToken()
+					<button class=" btn btn-danger" type="submit">Delete</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

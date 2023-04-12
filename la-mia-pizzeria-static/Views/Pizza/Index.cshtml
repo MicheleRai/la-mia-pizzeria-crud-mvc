@@ -64,7 +64,14 @@ else
                                 <h5 class="card-title ">@pizza.Name</h5>
                                 <p class="card-text">@pizza.Description</p>
                                 <p class="fw-bold">@pizza.Prezzo €</p>
-                                <a class="btn btn-primary "href="@Url.Action("Dettagli", "Pizza", new{ Id = @pizza.Id })">ciao</a>
+                                <div class="buttonContainer d-inline-flex">
+                                    <a class="btn btn-primary " href="@Url.Action("Dettagli", "Pizza", new{ Id = @pizza.Id })">Dettagli</a>
+                                    <a class="btn btn-warning mx-2" href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a>
+                                    <form  asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id">
+                                        @Html.AntiForgeryToken()
+                                        <button class=" btn btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
