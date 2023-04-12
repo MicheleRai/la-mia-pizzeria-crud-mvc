@@ -1,0 +1,79 @@
+﻿@model Pizza[]
+
+@{
+    ViewData["Title"] = "Home Page";
+
+    var pizze = Model;
+
+    //var pizza1 = new Pizza("Pizza margherita", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia quis est adipisci incidunt rem nostrum ipsam fuga ratione tempora eveniet!", "https://picsum.photos/200/300", 3.50);
+    //var pizza2 = new Pizza("Pizza capricciosa", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia quis est adipisci incidunt rem nostrum ipsam fuga ratione tempora eveniet!", "https://picsum.photos/200/300", 4);
+    //var pizza3 = new Pizza("Pizza 4 stagioni", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia quis est adipisci incidunt rem nostrum ipsam fuga ratione tempora eveniet!", "https://picsum.photos/200/300", 4.50);
+    //var pizza4 = new Pizza("Pizza diavola", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia quis est adipisci incidunt rem nostrum ipsam fuga ratione tempora eveniet!", "https://picsum.photos/200/300", 3.50);
+
+    //List<Pizza> pizze = new List<Pizza>();
+    //pizze.Add(pizza1);
+    //pizze.Add(pizza2);
+    //pizze.Add(pizza3);
+    //pizze.Add(pizza4);
+    //var pizze = new Pizza[]
+    //   {
+    //    new Pizza(
+    //        Foto: "https://picsum.photos/200/300",
+    //        Name: "Pizza margherita",
+    //        Description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia quis est adipisci incidunt rem nostrum ipsam fuga ratione tempora eveniet!",
+    //        Prezzo: 3.50
+
+    //    ),
+    //    new Pizza(
+    //        Foto: "https://picsum.photos/200/300",
+    //        Name: "Pizza capricciosa",
+    //        Description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia quis est adipisci incidunt rem nostrum ipsam fuga ratione tempora eveniet!",
+    //        Prezzo: 4
+
+    //    ),
+    //    new Pizza(
+    //        Foto: "https://picsum.photos/200/300",
+    //        Name: "Pizza 4 stagioni",
+    //        Description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia quis est adipisci incidunt rem nostrum ipsam fuga ratione tempora eveniet!",
+    //        Prezzo: 4.50
+    //    ),
+    //    new Pizza(
+    //        Foto: "https://picsum.photos/200/300",
+    //        Name: "Pizza diavola",
+    //        Description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia quis est adipisci incidunt rem nostrum ipsam fuga ratione tempora eveniet!",
+    //        Prezzo: 3.50
+    //    )
+    //   };
+}
+
+@if (pizze.Length is 0)
+{
+    <p>Nessuna pizza sul menu :\</p>
+}
+else
+{
+    <main>
+        <div class="container">
+            <div class="d-flex justify-content-center row row-cols-2 flex-wrap ">
+                @foreach (var pizza in pizze)
+                {
+                    <div class="col">
+                        <div class="card my-3" style="width: 30rem">
+                            <img src=@pizza.Foto class="card-img-top " alt="foto">
+                            <div class="card-body text-center">
+                                <h5 class="card-title ">@pizza.Name</h5>
+                                <p class="card-text">@pizza.Description</p>
+                                <p class="fw-bold">@pizza.Prezzo €</p>
+                                <a class="btn btn-primary "href="@Url.Action("Dettagli", "Pizza", new{ Id = @pizza.Id })">ciao</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </main>
+}
+
+
+

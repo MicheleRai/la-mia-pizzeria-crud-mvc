@@ -1,0 +1,111 @@
+﻿@{
+    
+
+    string name = "Michele";
+    string surname = "Rainone";
+
+    int SommaNumeri(int n)
+    {
+        int sum = 0;
+        for (int i = 1; i <= n; i++) sum += i;
+        return sum;
+    }
+
+    int SommaChar(char c, string str)
+    {
+        return str.Count(_c => _c == c);
+        //int sum = 0;
+        //foreach (var ch in characters)
+        //{
+        //    if (ch == c) sum++;
+        //}
+        //return sum;
+    }
+
+    List<int> RndList()
+    {
+        var rnd = new Random();
+        List<int> numList = new List<int>();
+        for (int i = 0; i < 20; i++)
+        {
+            numList.Add(rnd.Next(1, 91));
+        }
+        return numList;
+    }
+
+    List<int> numList = RndList();
+
+    var date = DateTime.Now;
+}
+
+<div >
+    @*ES 1*@
+    <h2 class="text center">
+        @name @surname
+    </h2>
+
+    @*ES 2*@
+    <p >
+        Creare una funzione che stampa la somma dei numeri che vanno da 1 a n (con n passato come parametro - n incluso)
+        Stampare dentro uno span il risultato.
+    </p>
+    <span>
+        @SommaNumeri(20)
+    </span>
+
+    @*ES 3*@
+    <p>
+        Contare quante volte la lettera a è presente nalla frase "nel mezzo del cammin di nostra vita" e stampare questo valore in pagina
+    </p>
+    <div class="text center">
+        "nel mezzo del cammin di nostra vita" contiene @SommaChar('a', "nel mezzo del cammin di nostra vita") lettere 'a'.
+    </div>
+
+    @*ES 4*@
+    <p>
+        Creare una List int di 20 numeri interi (generati random da 1 a 90, 1 e 90 inclusi) e mostrare in pagina solo i numeri compresi tra 20 e 70
+    </p>
+    <div class="text center">
+        
+        @for (int i = 0; i < numList.Count(); i++)
+        {
+            if (numList.ElementAt(i) >= 20 && numList.ElementAt(i) <= 70)
+            {
+                if (i != numList.Count() - 1)
+                {
+                    <text>@numList.ElementAt(i), </text>
+                }
+                else
+                {
+                    <text>@numList.ElementAt(i).</text>
+                }
+
+            }
+        }
+        
+    </div>
+
+    @*ES 5*@
+    <p>
+        Stampare in pagina la data e l'ora attuale (usando la classe DateTime) con il formato anno-mese-giorno ore:minuti:secondi
+    </p>
+    <div class="text center">
+        @DateTime.Now.ToString("HH:MM:ss")
+    </div>
+
+    @*ES 6*@
+    <p>
+        Partendo dalla data di oggi (usando la classe DateTime) stampare in pagina
+        a. la data di 7 giorni fa
+        b. che giorno della settimana è oggi (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...)
+        c. che giorno della settimana sarà nello stesso giorno e mese di oggi ma tra un anno (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...)
+    </p>
+    <div class="text center">
+          
+        <p>@date.AddDays(-7)</p>
+        <p>@date.ToString("dddd")</p>
+        <p>@date.AddYears(+1).ToString("dddd")</p>
+       
+    </div>
+
+</div>
