@@ -11,19 +11,24 @@
 		<form method="post" asp-controller="Pizza" asp-action="Update" asp-route-id="@pizza.Id" enctype="multipart/form-data">
 			@Html.AntiForgeryToken()
 			<div class="form-field">
-				<label asp-for="Name">Nome</label>
-				<input asp-for="Name" />
+				<label asp-for="Name" class="form-label">Nome</label>
+				<input asp-for="Name" class="form-control" />
 				<span asp-validation-for="Name" class="text error"></span>
 			</div>
 			<div class="form-field">
-				<label asp-for="Description">Descrizione</label>
-				<textarea asp-for="Description"></textarea>
+				<label asp-for="Description" class="form-label">Descrizione</label>
+				<textarea asp-for="Description" class="form-control"></textarea>
 				<span asp-validation-for="Description" class="text error"></span>
 			</div>
 			<div class="form-field">
-				<label asp-for="Foto">Percorso Foto</label>
-				<input asp-for="Foto" />
+				<label asp-for="Foto" class="form-label">Percorso Foto</label>
+				<input asp-for="Foto" class="form-control" />
 				<span asp-validation-for="Foto" class="text error"></span>
+			</div>
+			<div class="form-field">
+				<label asp-for="Prezzo" class="form-label">Prezzo</label>
+				<input type="text" asp-for="Prezzo" class="form-control">
+				<span asp-validation-for="Prezzo" class="text error"></span>
 			</div>
 			<button class="btn btn-success" type="submit">Save</button>
 		</form>
