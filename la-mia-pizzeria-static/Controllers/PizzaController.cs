@@ -37,6 +37,11 @@ namespace la_mia_pizzeria_static.Controllers
 
 			return View(pizza);
 		}
+		public IActionResult Privacy()
+		{
+
+			return View();
+		}
 		public IActionResult Create()
 		{
 			var formModel = new PizzaFormModel()
