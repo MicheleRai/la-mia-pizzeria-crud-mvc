@@ -21,14 +21,14 @@ namespace la_mia_pizzeria_static.Controllers
 		public IActionResult Index()
 		{
 			
-			var pizze = _context.Pizze.ToArray();
+			var pizze = _context.Pizze.Include(p => p.Category).ToArray();
 
 			return View(pizze);
 		}
 
 		public IActionResult Dettagli(int id)
 		{
-			var pizza = _context.Pizze.SingleOrDefault(p => p.Id == id);
+			var pizza = _context.Pizze.Include(p => p.Category).SingleOrDefault(p => p.Id == id);
 
 			if (pizza is null)
 			{
@@ -39,21 +39,25 @@ namespace la_mia_pizzeria_static.Controllers
 		}
 		public IActionResult Create()
 		{
-			var pizza = new Pizza();
+			var formModel = new PizzaFormModel()
+			{
+				Categories = _context.Categories.ToArray(),
+			};
 
-			return View(pizza);
+			return View(formModel);
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Create(Pizza pizza)
+		public IActionResult Create(PizzaFormModel form)
 		{
 			if (!ModelState.IsValid)
 			{
-				return View(pizza);
+				form.Categories = _context.Categories.ToArray();
+				return View(form);
 			}
 
-			_context.Pizze.Add(pizza);
+			_context.Pizze.Add(form.Pizza);
 			_context.SaveChanges();
 
 			return RedirectToAction("Index");
@@ -66,16 +70,23 @@ namespace la_mia_pizzeria_static.Controllers
 			{
 				return View("NotFound");
 			}
-			return View(pizza);
+			var formModel = new PizzaFormModel
+			{
+				Pizza = pizza,
+				Categories = _context.Categories.ToArray()
+			};
+
+			return View(formModel);
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Update(int id, Pizza pizza)
+		public IActionResult Update(int id, PizzaFormModel form)
 		{
 			if (!ModelState.IsValid)
 			{
-				return View(pizza);
+				form.Categories = _context.Categories.ToArray();
+				return View(form);
 			}
 			var savedPizza = _context.Pizze.AsNoTracking().FirstOrDefault(p => p.Id == id);
 
@@ -84,7 +95,7 @@ namespace la_mia_pizzeria_static.Controllers
 				return View("NotFound");
 			}
 
-			_context.Pizze.Update(pizza);
+			_context.Pizze.Update(form.Pizza);
 			_context.SaveChanges();
 
 			return RedirectToAction("Index");
