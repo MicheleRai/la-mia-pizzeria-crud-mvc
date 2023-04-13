@@ -46,7 +46,8 @@ namespace la_mia_pizzeria_static.Models
                     Description= "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia quis est adipisci incidunt rem nostrum ipsam fuga ratione tempora eveniet!",
                     Prezzo= 3.50
                 }
-            }; if (!Pizze.Any())
+            };
+			if (!Pizze.Any())
 			{
 				Pizze.AddRange(pizze);
 			}
@@ -57,12 +58,20 @@ namespace la_mia_pizzeria_static.Models
 				{
 					new()
 					{
-						Name = "Fun",
+						Name = "Bianca",
+					},
+					new()
+					{
+						Name = "Rossa",
+					},
+					new()
+					{
+						Name = "Vegana",
 					},
 					new()
 					{
 						Name = "Generic",
-						Pizza = pizze
+						Pizze = pizze
 					}
 				};
 
@@ -70,7 +79,7 @@ namespace la_mia_pizzeria_static.Models
 			}
 
 			SaveChanges();
-            }
+        }
 
     }
 }

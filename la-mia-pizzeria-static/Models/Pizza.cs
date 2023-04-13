@@ -22,8 +22,8 @@ namespace la_mia_pizzeria_static.Models
 		[Required(ErrorMessage = "Per piacere fornire un prezzo per la pizza.")]
 		public double Prezzo { get; set; }
 
-		[NonZero(ErrorMessage = "Per piacere scegliere una categoria.")]
-		public int CategoryId { get; set; }
+		[Nonzero(ErrorMessage = "Per piacere scegliere una categoria.")]
+		public int? CategoryId { get; set; }
 		public Category? Category { get; set; }
 	}
 }

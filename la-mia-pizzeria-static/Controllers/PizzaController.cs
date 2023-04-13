@@ -95,7 +95,11 @@ namespace la_mia_pizzeria_static.Controllers
 				return View("NotFound");
 			}
 
-			_context.Pizze.Update(form.Pizza);
+			savedPizza = form.Pizza;
+			savedPizza.Id = id;
+
+			_context.Pizze.Update(savedPizza);
+
 			_context.SaveChanges();
 
 			return RedirectToAction("Index");

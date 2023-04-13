@@ -11,6 +11,6 @@ namespace la_mia_pizzeria_static.Models
 		[StringLength(100, ErrorMessage = "Il titolo deve avere meno di 100 caratteri.")]
 		public string Name { get; set; } = string.Empty;
 
-		public IEnumerable<Pizza>? Pizza { get; set; }
+		public IEnumerable<Pizza>? Pizze { get; set; }
 	}
 }
