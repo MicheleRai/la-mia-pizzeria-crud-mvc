@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 
@@ -9,6 +10,8 @@ namespace la_mia_pizzeria_static.Models
 		public PizzeriaContext(DbContextOptions<PizzeriaContext> options) : base(options) { }
 		public DbSet<Pizza> Pizze { get; set; }
 		public DbSet<Category> Categories { get; set; }
+		public DbSet<Ingrediente> Ingredienti { get; set; }
+
 
 		//protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		//{
@@ -76,6 +79,27 @@ namespace la_mia_pizzeria_static.Models
 				};
 
 				Categories.AddRange(seed);
+			}
+			if (!Ingredienti.Any())
+			{
+				var seed = new Ingrediente[]
+				{
+					new()
+					{
+						Name = "pomodoro"
+					},
+					new()
+					{
+						Name = "farina",
+						Pizze = pizze
+					},
+					new()
+					{
+						Name = "mozzarella"
+					}
+				};
+
+				Ingredienti.AddRange(seed);
 			}
 
 			SaveChanges();
