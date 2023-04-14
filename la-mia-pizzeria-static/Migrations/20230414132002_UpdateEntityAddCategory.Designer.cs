@@ -12,7 +12,7 @@ using la_mia_pizzeria_static.Models;
 namespace la_mia_pizzeria_static.Migrations
 {
     [DbContext(typeof(PizzeriaContext))]
-    [Migration("20230413155256_UpdateEntityAddCategory")]
+    [Migration("20230414132002_UpdateEntityAddCategory")]
     partial class UpdateEntityAddCategory
     {
         /// <inheritdoc />
@@ -24,6 +24,21 @@ namespace la_mia_pizzeria_static.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("IngredientePizza", b =>
+                {
+                    b.Property<int>("IngredientiId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PizzeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IngredientiId", "PizzeId");
+
+                    b.HasIndex("PizzeId");
+
+                    b.ToTable("IngredientePizza");
+                });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Category", b =>
                 {
@@ -41,6 +56,23 @@ namespace la_mia_pizzeria_static.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("la_mia_pizzeria_static.Models.Ingrediente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ingredienti");
                 });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>
@@ -75,6 +107,21 @@ namespace la_mia_pizzeria_static.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Pizze");
+                });
+
+            modelBuilder.Entity("IngredientePizza", b =>
+                {
+                    b.HasOne("la_mia_pizzeria_static.Models.Ingrediente", null)
+                        .WithMany()
+                        .HasForeignKey("IngredientiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("la_mia_pizzeria_static.Models.Pizza", null)
+                        .WithMany()
+                        .HasForeignKey("PizzeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>

@@ -21,6 +21,10 @@
 				<span asp-validation-for="Pizza.Description" class="text error"></span>
 			</div>
 			<div class="form-field">
+				<label asp-for="IngredientiSelezionati" class="form-label">Ingredienti</label>
+				<select asp-for="IngredientiSelezionati" multiple="multiple" class="form-control" asp-items="@Model.Ingredienti"></select>
+			</div>
+			<div class="form-field">
 				<label asp-for="Pizza.Foto" class="form-label">Percorso Foto</label>
 				<input asp-for="Pizza.Foto" class="form-control" />
 				<span asp-validation-for="Pizza.Foto" class="text error"></span>

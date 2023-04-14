@@ -17,8 +17,20 @@
 				@pizza.Description
 			</p>
 			<p>
+				<h3>Ingredienti</h3>
+				<div class="flex">
+					@foreach (var ingrediente in pizza.Ingredienti!)
+					{
+						<span>
+							@ingrediente.Name
+						</span>
+					}
+				</div>
+			</p>
+			<p>
 				@pizza.Prezzo $
 			</p>
+			
 			<div class="buttonContainer d-inline-flex">
 				<a class="btn btn-warning m-2" href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a>
 				<form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id">
