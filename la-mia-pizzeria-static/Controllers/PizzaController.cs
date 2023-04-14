@@ -66,7 +66,9 @@ namespace la_mia_pizzeria_static.Controllers
 				return View(form);
 			}
 
-			_context.Pizze.Add(form.Pizza);
+            form.Pizza.Ingredienti = form.IngredientiSelezionati.Select(st => _context.Ingredienti.First(t => t.Id == Convert.ToInt32(st))).ToList();
+
+            _context.Pizze.Add(form.Pizza);
 			_context.SaveChanges();
 
 			return RedirectToAction("Index");
@@ -119,9 +121,8 @@ namespace la_mia_pizzeria_static.Controllers
 			savedPizza.Category = form.Pizza.Category;
 			savedPizza.Foto = form.Pizza.Foto;
 			savedPizza.Prezzo = form.Pizza.Prezzo;
-			savedPizza.Ingredienti = form.Pizza.Ingredienti;
-
-			_context.SaveChanges();
+            savedPizza.Ingredienti = form.IngredientiSelezionati.Select(st => _context.Ingredienti.First(t => t.Id == Convert.ToInt32(st))).ToList();
+            _context.SaveChanges();
 
 			return RedirectToAction("Index");
 		}
