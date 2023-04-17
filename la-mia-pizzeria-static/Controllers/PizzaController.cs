@@ -1,14 +1,17 @@
 ﻿using la_mia_pizzeria_static.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Data;
 using System.Diagnostics;
 
 namespace la_mia_pizzeria_static.Controllers
 {
-	public class PizzaController : Controller
+    [Authorize(Roles = "Admin,User")]
+    public class PizzaController : Controller
 	{
 		private readonly ILogger<PizzaController> _logger;
 		private readonly PizzeriaContext _context;
@@ -43,7 +46,10 @@ namespace la_mia_pizzeria_static.Controllers
 
 			return View();
 		}
-		public IActionResult Create()
+
+        [Authorize(Roles = "Admin")]
+
+        public IActionResult Create()
 		{
 			var formModel = new PizzaFormModel()
 			{
@@ -54,7 +60,9 @@ namespace la_mia_pizzeria_static.Controllers
 			return View(formModel);
 		}
 
-		[HttpPost]
+        [Authorize(Roles = "Admin")]
+
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public IActionResult Create(PizzaFormModel form)
 		{
@@ -73,7 +81,9 @@ namespace la_mia_pizzeria_static.Controllers
 
 			return RedirectToAction("Index");
 		}
-		public IActionResult Update(int id)
+        [Authorize(Roles = "Admin")]
+
+        public IActionResult Update(int id)
 		{
 			var pizza = _context.Pizze.Include(p => p.Ingredienti).FirstOrDefault(p => p.Id == id);
 
@@ -96,8 +106,9 @@ namespace la_mia_pizzeria_static.Controllers
 
 			return View(formModel);
 		}
+        [Authorize(Roles = "Admin")]
 
-		[HttpPost]
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public IActionResult Update(int id, PizzaFormModel form)
 		{
@@ -115,7 +126,6 @@ namespace la_mia_pizzeria_static.Controllers
 			{
 				return View("NotFound");
 			}
-
 			savedPizza.Name = form.Pizza.Name;
 			savedPizza.Description = form.Pizza.Description;
 			savedPizza.Category = form.Pizza.Category;
@@ -127,7 +137,9 @@ namespace la_mia_pizzeria_static.Controllers
 			return RedirectToAction("Index");
 		}
 
-		[HttpPost]
+        [Authorize(Roles = "Admin")]
+
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public IActionResult Delete(int id)
 		{
